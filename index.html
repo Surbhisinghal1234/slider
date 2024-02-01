@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="slider-main">
+      <div class="slider">
+        <img class="slide active" src="./image/slide-2.jpg" alt="" />
+        <img class="slide" src="./image/slide-3.jpg" alt="" />
+        <img class="slide" src="./image/slide-image-4.jpg" alt="" />
+        <img class="slide" src="./image/slide-1.jpg" alt="" />
+      </div>
+
+      <span class="arrow left">&#10094;</span>
+      <span class="arrow right">&#10095;</span>
+    </div>
+    <script>
+      const slider = document.querySelector(".slider");
+      const sliderMain = document.querySelector(".slider-main");
+      const slides = document.querySelectorAll(".slide");
+      const left = document.querySelector(".left");
+      const right = document.querySelector(".right");
+      const images = document.querySelectorAll(".slide");
+
+      const sliderMainWidth = sliderMain.clientWidth;
+
+      images.forEach((img) => (img.style.width = sliderMainWidth + "px"));
+
+      slider.style.width = images.count * sliderMainWidth + "px";
+
+      let slideIndex = 0;
+
+      slides[slideIndex].classList.add("active");
+
+      left.addEventListener("click", leftSlide);
+      right.addEventListener("click", rightSlide);
+
+      function leftSlide() {
+        slides[slideIndex].classList.remove("active");
+
+        slideIndex = slideIndex === 0 ? slides.length - 1 : slideIndex - 1;
+
+        slides[slideIndex].classList.add("active");
+
+        slider.style.transform = `translateX(-${slideIndex * sliderMainWidth})`;
+      }
+
+      function rightSlide() {
+        slides[slideIndex].classList.remove("active");
+
+        slideIndex = slideIndex === slides.length - 1 ? 0 : slideIndex + 1;
+
+        slides[slideIndex].classList.add("active");
+
+        slider.style.transform = `translateX(-${slideIndex * sliderMainWidth})`;
+      }
+    </script>
+  </body>
+</html>
